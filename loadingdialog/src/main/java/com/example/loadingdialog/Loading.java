@@ -27,10 +27,19 @@ public class Loading extends DialogFragment {
     int foreground = Color.rgb(255,0,0);;
     float radius;
     String text = "Loading";
+    //объект интерфейса отмены
+    onCancelListener cancelListener = new onCancelListener(){
+        @Override
+        public void onCancel() {
+
+        }
+    };
 
     LoadingAnim ld;
     View v;
     boolean flag = false;
+
+    //конструктор ага
     public Loading(int background, int fragmentBackground, int foreground, float radius){
         this.background = background;
         this.fragmentBackground = fragmentBackground;
@@ -84,18 +93,35 @@ public class Loading extends DialogFragment {
             return null;
     }
 
+    //при отмене выключаем анимацию и запускаем кастомный листенер
+
     //listener на отмену диалога
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(getDialog());
-        ld.changeFlag();
-        ld.stopMotion();
+        stopAnim();
+        cancelListener.onCancel();
     }
     //listener на отмену диалога нажатием кнопки back
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
+        stopAnim();
+        cancelListener.onCancel();
+    }
+    //метод отмены (прост)
+    public void cancel(){
+        stopAnim();
+        cancelListener.onCancel();
+    }
+
+    //метод для установки кастомного слушателя отмены
+    public void setOnCancelListener(onCancelListener cancelListener){
+        this.cancelListener = cancelListener;
+    }
+
+    void stopAnim(){
         ld.changeFlag();
         ld.stopMotion();
     }

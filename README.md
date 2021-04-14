@@ -31,3 +31,18 @@ load.show(getSupportFragmentManager(), "dial");
 3) foreground color
 4) border radius
 5) string (default - Loading)
+
+#### cancel dialog
+```
+load.cancel();
+```
+### onCancel
+You can also set onCancelListener like this:
+```
+load.setOnCancelListener(new onCancelListener() {
+     @Override
+     public void onCancel() {
+          Log.d("animation", "cancelled");
+     }
+});
+```

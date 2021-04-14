@@ -112,6 +112,7 @@ public class Loading extends DialogFragment {
     }
     //метод отмены (прост)
     public void cancel(){
+        super.dismiss();
         stopAnim();
         cancelListener.onCancel();
     }
@@ -122,8 +123,9 @@ public class Loading extends DialogFragment {
     }
 
     void stopAnim(){
-        ld.changeFlag();
-        ld.stopMotion();
+        if(ld!=null) {
+            ld.changeFlag();
+            ld.stopMotion();
+        }
     }
-
 }

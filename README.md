@@ -15,7 +15,7 @@ allprojects {
 2) paste this in build.gradle (module)
 ```
 dependencies {
-     implementation 'com.github.VVan228:LoadingDialog:Tag'
+     implementation 'com.github.VVan228:LoadingDialog:0.3'
 }
 ```
 #### done
